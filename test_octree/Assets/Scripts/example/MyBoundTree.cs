@@ -32,7 +32,8 @@ public class MyBoundTree : MonoBehaviour
         }
 
         List<GameObject> collides = new List<GameObject>();
-        boundsTree.GetColliding(collides, Tester.bounds);
+        //boundsTree.GetColliding(collides, Tester.bounds);
+        boundsTree.GetColliding(collides, new OBB(Tester.transform.localToWorldMatrix));
         for (int i = 0; i < collides.Count; i++)
         {
             collides[i].GetComponent<Renderer>().enabled = true;

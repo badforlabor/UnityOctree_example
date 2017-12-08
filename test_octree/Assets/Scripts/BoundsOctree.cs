@@ -158,6 +158,10 @@ public class BoundsOctree<T> {
 		//#endif
 		rootNode.GetColliding(ref checkBounds, collidingWith);
 	}
+    public void GetColliding(List<T> collidingWith, OBB checkBounds)
+    {
+        rootNode.GetColliding(ref checkBounds, collidingWith);
+    }
 
 	/// <summary>
 	/// Returns an array of objects that intersect with the specified ray, if any. Otherwise returns an empty array. See also: IsColliding.

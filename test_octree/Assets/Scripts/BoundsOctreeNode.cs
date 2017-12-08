@@ -202,6 +202,35 @@ public class BoundsOctreeNode<T> {
 		}
 	}
 
+    // OBB弱支持。默认将被检测对象当成AABB对象。
+    public void GetColliding(ref OBB checkBounds, List<T> result)
+    {
+        // Are the input bounds at least partially in this node?
+        if (!checkBounds.Intersects(bounds))
+        {
+            return;
+        }
+
+        // Check against any objects in this node
+        for (int i = 0; i < objects.Count; i++)
+        {
+            if (checkBounds.Intersects(objects[i].Bounds))
+            {
+                result.Add(objects[i].Obj);
+            }
+        }
+
+        // Check children
+        if (children != null)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                children[i].GetColliding(ref checkBounds, result);
+            }
+        }
+    }
+
+
 	/// <summary>
 	/// Returns an array of objects that intersect with the specified ray, if any. Otherwise returns an empty array. See also: IsColliding.
 	/// </summary>
